@@ -1,5 +1,5 @@
-source "https://rubygems.org"
-require 'sinatra'
-require 'twilio-ruby'
-require 'json'
-require 'rest_client'
+source 'https://rubygems.org'
+gem 'sinatra'
+gem 'twilio-ruby'
+gem 'json'
+gem 'rest-client'
