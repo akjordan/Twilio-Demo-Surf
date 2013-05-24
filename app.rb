@@ -1,13 +1,23 @@
+require 'bundler/setup'
 require 'sinatra'
 require 'twilio-ruby'
 require 'json'
 require 'rest_client'
+require 'rack/cache'
+require 'restclient/components'
+require 'dalli'
 
 # a hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
   get(path, opts, &block)
   post(path, opts, &block)
 end
+
+# setup RestClient caching backed by Memchached
+RestClient.enable Rack::Cache,
+  :verbose     => true,
+  :metastore   => Dalli::Client.new,
+  :entitystore => Dalli::Client.new
 
 # base URL for the app
 get_or_post '/' do
