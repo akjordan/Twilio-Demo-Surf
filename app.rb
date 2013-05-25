@@ -6,7 +6,7 @@ def get_or_post(path, opts={}, &block)
   post(path, opts, &block)
 end
 
-# setup RestClient caching backed by Memchached
+# setup RestClient caching backed by Memcachier
 RestClient.enable Rack::Cache,
   :verbose      => true,
   :metastore   => Dalli::Client.new,
@@ -18,7 +18,7 @@ get_or_post '/' do
 # an array of San Francisco spot IDs
 spot_ids = ["113", "649", "648", "114", "117"]
 
-if params["Body"].include? "spots"
+if params["Body"].include? "spots" 
 
 	# query Splitcast API and store JSON of spots
 	response = RestClient.get 'http://api.spitcast.com/api/county/spots/san-francisco/', {:accept => :json}
@@ -33,7 +33,7 @@ if params["Body"].include? "spots"
 	# build Twilio response
 	response = Twilio::TwiML::Response.new { |r| r.Sms "#{spots}" }
 
-elsif spot_ids.include? params["Body"]
+elsif spot_ids.downcase.include? params["Body"]
 
 	# query Splitcast API and store JSON of conditions for a given spot
 	response = RestClient.get "http://api.spitcast.com/api/spot/forecast/#{params["Body"]}/", {:accept => :json}
@@ -47,7 +47,7 @@ elsif spot_ids.include? params["Body"]
 	all_conditions.each do |i|
 	  time_difference = (DateTime.parse(i["gmt"]).to_time.to_i - (Time.now.getgm.to_i))
 	  if (time_difference >= 0 && time_difference <= 14400)
-	    conditions << "#{i["hour"]} #{i["size"]}ft shape: #{i["shape_full"]} "
+	    conditions << "#{i["hour"]}: #{i["size"]}ft shape: #{i["shape_full"]} / "
 	  end
 	end
 
