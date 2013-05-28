@@ -30,10 +30,10 @@ if incoming_sms.include?("spots")
 	spots = ""
 
 	# iterate over all_spots and pull out spot_name and spot_id
-	all_spots.each { |i| spots << "#{i["spot_name"]}: #{i["spot_id"]} \n" }
+	all_spots.each { |i| spots << "#{i["spot_name"]}: #{i["spot_id"]}\n" }
 
 	# build Twilio response
-	response = Twilio::TwiML::Response.new { |r| r.Sms "#{spots}" }
+	response = Twilio::TwiML::Response.new { |r| r.Sms "Reply with an ID to get a forecast\n#{spots}" }
 
 elsif spot_ids.include?(incoming_sms)
 
