@@ -49,7 +49,7 @@ elsif spot_ids.include?(incoming_sms)
 	all_conditions.each do |i|
 	  time_difference = (DateTime.parse(i["gmt"]).to_time.to_i - (Time.now.getgm.to_i))
 	  if (time_difference >= 0 && time_difference <= 14400)
-	    conditions << "#{i["hour"]}: #{i["size"]}ft, #{i["shape_full"]}\n"
+	    conditions << "#{i["hour"]}: #{i["size_ft"].round(2)}ft, #{i["shape_full"]}\n"
 	  end
 	end
 
