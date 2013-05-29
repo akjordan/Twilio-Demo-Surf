@@ -4,7 +4,7 @@ This is a [Twilio](http://www.twilio.com) demo that uses the totally excellent [
 
 Right now it's hard coded to be mosty useful to San Francisco locals but you could modify it to be more open ended.
 
-This web page isn't much fun. To try out the app, point a Twilio SMS URL at http://spitcast-sms.herokuapp.com/
+This web page isn't much fun. To try out the app, send an SMS to **(617) 3-SWELLS**.
 
 Text "spots" to get a list of the surf spots in SF and their IDs.
 
