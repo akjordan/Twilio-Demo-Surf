@@ -7,7 +7,7 @@ RestClient.enable Rack::Cache,
   :entitystore => Dalli::Client.new
 
 # get request
-get "/" do
+get "/*" do
 	# render web.md into the index tempate using erb
 	markdown :web, :layout_engine => :erb, :layout => :index
 end
