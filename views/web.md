@@ -2,7 +2,7 @@ Spitcast/Twilio Demo
 -------
 This is a [Twilio](http://www.twilio.com) demo that uses the totally excellent [Spitcast API](http://www.spitcast.com/api/docs/) to give you some surf predictions via SMS.
 
-Right now it's hard coded to be mosty useful to San Francisco locals but you could modify it to be more open ended.
+Right now it's hard coded to only show spots in San Francisco, but could be extended to anywhere the Spitcast API covers.
 
 This web page isn't much fun. To try out the app, send an SMS to **(617) 3-SWELLS**.
 
