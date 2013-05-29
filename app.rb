@@ -54,7 +54,7 @@ elsif spot_ids.include?(incoming_sms)
 	response = Twilio::TwiML::Response.new  { |r| r.Sms "Conditions for #{all_conditions.first["spot_name"]}\n* Time: size, shape *\n#{conditions}" }
 else
 	# build Twilio response
-	response = Twilio::TwiML::Response.new  { |r| r.Sms "Sorry brah, locals only, please type 'spots' to get a list of spots in SF or the ID of your favorite spot (I like 113) to get conditions at that spot." }
+	response = Twilio::TwiML::Response.new  { |r| r.Sms "Sorry brah, locals only, type 'spots' to get a list of spots in SF or the ID of your favorite spot to get conditions for the next 4 hours at that spot." }
 end
 
 response.text

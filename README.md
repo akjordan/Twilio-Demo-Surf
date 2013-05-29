@@ -11,4 +11,4 @@ Text "spots" to get a list of the surf spots in SF and their IDs.
 
 Text a spot ID to get conditions at that spot for the next four hours.
 
-This is built using Sinatra, hosted on [Heroku](http://spitcast-sms.herokuapp.com/), and uses [memcachier](http://memcachier.com/) and [dalli](https://github.com/mperham/dalli) to cache responses.
+This is built using [Sinatra](http://www.sinatrarb.com), hosted on [Heroku](http://spitcast-sms.herokuapp.com/), and uses [memcachier](http://memcachier.com) and [dalli](https://github.com/mperham/dalli) to cache responses.
