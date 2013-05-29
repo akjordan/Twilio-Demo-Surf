@@ -1,7 +1,7 @@
 Twilio-Demo-Surf
 ================
 
-A Twilio demo that uses the totally excellent [Spitcast API](http://www.spitcast.com/api/docs/) to give you some surf predictions via SMS.
+This is a [Twilio](http://www.twilio.com) demo that uses the totally excellent [Spitcast API](http://www.spitcast.com/api/docs/) to give you some surf predictions via SMS.
 
 Right now it's hard coded to be mosty useful to San Francisco locals.
 
