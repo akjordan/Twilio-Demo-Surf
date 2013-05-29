@@ -12,6 +12,13 @@ RestClient.enable Rack::Cache,
   :metastore   => Dalli::Client.new,
   :entitystore => Dalli::Client.new
 
+
+#
+get "/"
+
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,)
+
+
 # base URL for the app
 get_or_post "/" do
 
@@ -59,7 +66,7 @@ elsif spot_ids.include?(incoming_sms)
 else
 
 	# build Twilio response
-	response = Twilio::TwiML::Response.new  { |r| r.Sms "Sorry brah, locals only, please type 'spots' or a valid spot ID" }
+	response = Twilio::TwiML::Response.new  { |r| r.Sms "Sorry brah, locals only, please type 'spots' to get a list of spots in SF or the ID of your favorite spot (I like 113) to get conditions at that spot." }
 
 end
 
