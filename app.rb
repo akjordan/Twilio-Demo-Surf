@@ -6,18 +6,19 @@ RestClient.enable Rack::Cache,
   :metastore   => Dalli::Client.new,
   :entitystore => Dalli::Client.new
 
-# get request
+# default route that handles all GET requests and serves welcome page
 get "/*" do
 	# render web.md into the index tempate using erb
 	markdown :web, :layout_engine => :erb, :layout => :index
 end
 
-# base URL for the app
+# this route handles all POST requests from Twilio
 post "/" do
 
-# an array of San Francisco spot IDs
+# an array of San Francisco spot IDs used to match against incoming responses
 spot_ids = ["113", "649", "648", "114", "117"]
 
+# take the body of the SMS and remove any spaces and make all lower case
 incoming_sms = params["Body"].chomp.downcase
 
 if incoming_sms.include?("spots")
@@ -42,7 +43,7 @@ elsif spot_ids.include?(incoming_sms)
 	conditions = ""
 
 	# iterate over all_conditions and pull out hour, shape_full, and size
-	# parse "gmt" from JSON, parse it into a DateTime and compare it to the system time represented in GMT to get only the nearest 4 predictions
+	# parse "gmt" from JSON, parse it into a DateTime and compare it to the system time represented in GMT to store only the nearest 4 predictions
 	all_conditions.each do |i|
 	  time_difference = (DateTime.parse(i["gmt"]).to_time.to_i - (Time.now.getgm.to_i))
 	  if (time_difference >= 0 && time_difference <= 14400)
@@ -53,9 +54,9 @@ elsif spot_ids.include?(incoming_sms)
 	# build Twilio response
 	response = Twilio::TwiML::Response.new  { |r| r.Sms "Conditions for #{all_conditions.first["spot_name"]}\n* Time: size, shape *\n#{conditions}" }
 else
-	# build Twilio response
+	# if body doesn't conatain "spots" or a spot ID, return this default message
 	response = Twilio::TwiML::Response.new  { |r| r.Sms "Sorry brah, locals only, type 'spots' to get a list of spots in SF or the ID of your favorite spot to get conditions for the next 4 hours at that spot." }
 end
-
+# return valid TwiML back to Twilio
 response.text
 end
